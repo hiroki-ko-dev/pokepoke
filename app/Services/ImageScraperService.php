@@ -2,35 +2,27 @@
 
 namespace App\Services;
 
-use Goutte\Client;
-use Illuminate\Support\Facades\Storage;
-
-class ImageScraperService
+class ImageService
 {
-    protected $client;
-
-    public function __construct(Client $client)
+    public function getAllJpgImages(): array
     {
-        $this->client = $client;
+        $directory = public_path('images/cards');
+        return $this->getFilesRecursively($directory);
     }
 
-    public function scrapeImages(string $url, string $directory)
+    private function getFilesRecursively(string $directory): array
     {
-        $crawler = $this->client->request('GET', $url);
+        $jpgFiles = [];
 
-        // 保存ディレクトリが存在しない場合は作成
-        if (!Storage::exists($directory)) {
-            Storage::makeDirectory($directory);
+        if (is_dir($directory)) {
+            $files = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($directory));
+            foreach ($files as $file) {
+                if ($file->isFile() && preg_match('/\.jpg$/i', $file->getFilename())) {
+                    $jpgFiles[] = $file->getPathname();
+                }
+            }
         }
 
-        $crawler->filter('img')->each(function ($node) use ($directory) {
-            $imgUrl = $node->attr('src');
-            $imgName = basename(parse_url($imgUrl, PHP_URL_PATH));
-            $imgData = file_get_contents($imgUrl);
-
-            if ($imgData !== false) {
-                Storage::put($directory . '/' . $imgName, $imgData);
-            }
-        });
+        return $jpgFiles;
     }
 }
