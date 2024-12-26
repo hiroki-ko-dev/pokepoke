@@ -17,12 +17,13 @@
         <div class="container">
             <p>&copy; 2024 ポケポケ All Rights Reserved.</p>
         </div>
+        @stack('scripts')
     </footer>
+  <script>
+    document.querySelector('.hamburger-menu').addEventListener('click', function() {
+        document.querySelector('.nav ul').classList.toggle('open');
+        this.classList.toggle('open');
+    });
+  </script>
 </body>
-<script>
-  document.querySelector('.hamburger-menu').addEventListener('click', function() {
-      document.querySelector('.nav ul').classList.toggle('open');
-      this.classList.toggle('open');
-  });
-</script>
 </html>

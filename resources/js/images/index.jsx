@@ -44,7 +44,7 @@ const ImageGallery = ({ images }) => {
 
 // サーバーから画像データを取得
 const images = [
-    '/images/cards/A1-011-226.png',
+    '/assets/images/cards/A1/charizard/A1-011-226.png',
     // 他の画像URLを追加
 ];
 
