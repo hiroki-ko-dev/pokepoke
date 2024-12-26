@@ -1,0 +1,18 @@
+{
+  "resources/js/images/index.jsx": {
+    "file": "assets/index-q2r8zoTV.js",
+    "name": "index",
+    "src": "resources/js/images/index.jsx",
+    "isEntry": true
+  },
+  "resources/scss/home/style.scss": {
+    "file": "assets/style-DO9ZsUAC.css",
+    "src": "resources/scss/home/style.scss",
+    "isEntry": true
+  },
+  "resources/scss/images/index.scss": {
+    "file": "assets/index-DvA7EstD.css",
+    "src": "resources/scss/images/index.scss",
+    "isEntry": true
+  }
+}

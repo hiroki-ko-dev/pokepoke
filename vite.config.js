@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import react from '@vitejs/plugin-react'; // React用プラグイン（必要に応じて）
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [
@@ -8,19 +8,30 @@ export default defineConfig({
       input: [
         'resources/scss/home/style.scss',
         'resources/scss/images/index.scss',
-        'resources/ts/images/index.ts', // TypeScriptに変更
+        'resources/js/images/index.jsx',
       ],
-      refresh: true,
+      refresh: true, // ファイル変更時にブラウザをリロード
     }),
-    react(), // 必要に応じてReactプラグインを追加
+    react(),
   ],
-  publicDir: 'public',
   resolve: {
     alias: {
-      '@': '/resources/js', // TypeScript用エイリアス
+      '@': '/resources/js',
     },
   },
   build: {
-    outDir: 'public', // ビルド出力ディレクトリ
+    outDir: 'public/build', // 出力ディレクトリ
+    emptyOutDir: false, // 出力前にディレクトリを空にしない
+  },
+  server: {
+    host: '0.0.0.0', // Docker コンテナ内で動作
+    port: 5173, // Vite のデフォルトポート
+    watch: {
+      usePolling: true, // ファイル監視をポーリングで行う
+    },
+    hmr: {
+      host: 'localhost', // ホスト側の名前
+      port: 5173,
+    },
   },
 });
