@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "target": "es2016",
+      "module": "commonjs",
+      "esModuleInterop": true,
+      "strict": true,
+      "jsx": "react-jsx",
+      "moduleResolution": "node",
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+    },
+    "include": [
+      "resources/js/**/*",
+      "resources/ts/**/*"
+    ]
+  }
+  

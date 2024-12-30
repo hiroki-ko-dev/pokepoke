@@ -8,7 +8,7 @@ final class ImageService
 {
     public function getAllJpgImages(): array
     {
-        $directory = public_path('images/cards');
+        $directory = public_path('assets/images/cards');
         return $this->getFilesRecursively($directory);
     }
 

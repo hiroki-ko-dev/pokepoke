@@ -2,6 +2,10 @@
 
 @section('title', 'トップ')
 
+@section('styles')
+  @vite('resources/scss/home/style.scss')
+@endsection
+
 @section('content')
 <section class="hero">
     <!-- 画像のみ表示 -->
