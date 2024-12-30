@@ -19,7 +19,6 @@ final class ImageController extends Controller
     {
         try {
             $images = $this->imageService->getAllJpgImages();
-
             return view('images.index', [
                 'images' => $images,
             ]);

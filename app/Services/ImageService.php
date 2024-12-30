@@ -20,7 +20,8 @@ final class ImageService
             $files = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($directory));
             foreach ($files as $file) {
                 if ($file->isFile() && preg_match('/\.jpg$/i', $file->getFilename())) {
-                    $jpgFiles[] = $file->getPathname();
+                    // public_pathを削除してURL形式に変換
+                    $jpgFiles[] = str_replace(public_path(), '', $file->getPathname());
                 }
             }
         }
