@@ -18,8 +18,8 @@ final class PackController extends Controller
 
     public function index()
     {
-        $this->packService->getPacks();
-        return view('packs.index');
+        $packs = $this->packService->getPacks();
+        return view('packs.index', compact('packs'));
     }
 
     public function create()
