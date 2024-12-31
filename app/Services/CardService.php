@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-final class ImageService
+final class CardService
 {
     public function getAllJpgImages(): array
     {

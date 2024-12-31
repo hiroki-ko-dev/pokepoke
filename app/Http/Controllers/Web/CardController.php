@@ -5,20 +5,20 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Services\ImageService;
+use App\Services\CardService;
 use Exception;
 
-final class ImageController extends Controller
+final class CardController extends Controller
 {
     public function __construct(
-        public readonly ImageService $imageService
+        public readonly CardService $cardService
     ) {
     }
 
     public function index()
     {
         try {
-            $images = $this->imageService->getAllJpgImages();
+            $images = $this->cardService->getAllJpgImages();
             return view('images.index', [
                 'images' => $images,
             ]);
