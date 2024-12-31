@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Services\ImageService;
+use App\Services\Image\ImageService;
 use Exception;
 
 final class ImageController extends Controller

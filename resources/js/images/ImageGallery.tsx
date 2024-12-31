@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 
 // 画像データの型を定義
@@ -9,6 +9,11 @@ interface ImageGalleryProps {
 const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
+  const [formData, setFormData] = useState({
+    pack_id: '',
+    name: '',
+    reality: ''
+  });
 
   const openModal = (image: string) => {
     setSelectedImage(image);
@@ -18,6 +23,19 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
   const closeModal = () => {
     setSelectedImage(null);
     setModalOpen(false);
+    setFormData({ pack_id: '', name: '', reality: '' }); // フォームをリセット
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // 登録処理を実装
+    console.log('登録データ:', { ...formData, image: selectedImage });
+    closeModal();
   };
 
   return (
@@ -33,9 +51,54 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
       {isModalOpen && (
         <div className="modal">
           <div className="modal-content">
-            <h2>画像編集</h2>
-            <img src={selectedImage!} alt="Selected" className="modal-image" />
-            <button onClick={closeModal} className="close-button">閉じる</button>
+            <div className="modal-body">
+              <div className="modal-image-container">
+                <h2>画像編集</h2>
+                <img src={selectedImage!} alt="Selected" className="modal-image" />
+              </div>
+              <div className="modal-form-container">
+                <form onSubmit={handleSubmit}>
+                  <div className="form-group">
+                    <label>
+                      Pack ID:
+                      <input
+                        type="text"
+                        name="pack_id"
+                        value={formData.pack_id}
+                        onChange={handleInputChange}
+                        className="form-control"
+                      />
+                    </label>
+                  </div>
+                  <div className="form-group">
+                    <label>
+                      Name:
+                      <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        className="form-control"
+                      />
+                    </label>
+                  </div>
+                  <div className="form-group">
+                    <label>
+                      Reality:
+                      <input
+                        type="text"
+                        name="reality"
+                        value={formData.reality}
+                        onChange={handleInputChange}
+                        className="form-control"
+                      />
+                    </label>
+                  </div>
+                  <button type="submit" className="submit-button">登録</button>
+                </form>
+                <button onClick={closeModal} className="close-button">閉じる</button>
+              </div>
+            </div>
           </div>
         </div>
       )}

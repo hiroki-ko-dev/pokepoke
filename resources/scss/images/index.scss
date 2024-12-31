@@ -1,7 +1,7 @@
 .gallery {
   padding: 20px;
-  position: relative; /* 必要に応じて追加 */
-  z-index: 0; /* すべての要素より低い値を設定 */
+  position: relative;
+  z-index: 0;
 }
 
 .image-grid {
@@ -13,10 +13,10 @@
 .image-item {
   cursor: pointer;
   transition: transform 0.2s;
-}
 
-.image-item:hover {
-  transform: scale(1.05);
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 .image {
@@ -31,65 +31,87 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8); /* 背景色 */
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* 高い値を設定して前面に表示 */
-}
+  z-index: 1000;
 
-.modal-content {
-  position: relative;
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  text-align: center;
-  max-width: 80%;
-  max-height: 80%;
-  overflow-y: auto;
-  z-index: 1001; /* モーダル背景よりさらに前面 */
-}
+  &-content {
+    position: relative;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 80%;
+    max-height: 80%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
 
-/* モーダル画像のスタイル */
-.modal-image {
-  max-width: 100%;
-  height: auto;
-  margin: 20px 0;
-  border-radius: 8px;
-}
+    .modal-body {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+    }
 
-/* 閉じるボタン */
-.close-button {
-  padding: 12px 24px;
-  background: #f44336;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
-  font-size: 16px;
-  transition: background 0.2s ease-in-out;
-}
+    .modal-image-container {
+      flex: 1;
+      text-align: center;
 
-.close-button:hover {
-  background: #d32f2f;
-}
+      .modal-image {
+        max-width: 100%;
+        height: auto;
+        margin: 20px 0;
+        border-radius: 8px;
+      }
+    }
 
-/* アニメーション: モーダルが表示される時の効果 */
-.modal.fade-in {
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-}
+    .modal-form-container {
+      flex: 1;
+      text-align: left;
 
-.modal.fade-in.show {
-  opacity: 1;
-}
+      .form-group {
+        margin-bottom: 15px;
 
-/* モーダルの外側をクリックしたときに閉じるように */
-.modal-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1; /* モーダルコンテンツより下に配置 */
+        label {
+          display: block;
+          margin-bottom: 8px;
+        }
+
+        .form-control {
+          width: 100%;
+          padding: 8px;
+        }
+      }
+
+      .submit-button {
+        padding: 10px 20px;
+        background: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+          background: #45a049;
+        }
+      }
+
+      .close-button {
+        padding: 12px 24px;
+        background: #f44336;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-top: 10px;
+
+        &:hover {
+          background: #d32f2f;
+        }
+      }
+    }
+  }
 }

@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('packs', function (Blueprint $table) {
             $table->id();
             $table->string('name')->comment('パック名');
+            $table->string('symbol')->comment('パック記号');
             $table->string('type')->comment('パック種別');
             $table->string('image_url')->comment('画像URL');
             $table->timestamps();
