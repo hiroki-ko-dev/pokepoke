@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Services\Image;
+namespace App\Services;
 
 final class ImageService
 {

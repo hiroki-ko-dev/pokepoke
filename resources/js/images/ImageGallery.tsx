@@ -10,7 +10,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [formData, setFormData] = useState({
-    pack_id: '',
+    packId: '',
     name: '',
     reality: ''
   });
@@ -23,7 +23,7 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
   const closeModal = () => {
     setSelectedImage(null);
     setModalOpen(false);
-    setFormData({ pack_id: '', name: '', reality: '' }); // フォームをリセット
+    setFormData({ packId: '', name: '', reality: '' }); // フォームをリセット
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,8 +63,8 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
                       Pack ID:
                       <input
                         type="text"
-                        name="pack_id"
-                        value={formData.pack_id}
+                        name="packId"
+                        value={formData.packId}
                         onChange={handleInputChange}
                         className="form-control"
                       />

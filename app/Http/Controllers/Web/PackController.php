@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Services\Pack\PackService;
+use App\Services\PackService;
+use App\DTOs\Pack\CreatePackDTO;
+use Illuminate\Http\Request;
 
 final class PackController extends Controller
 {
@@ -16,7 +18,8 @@ final class PackController extends Controller
 
     public function index()
     {
-        return view('packs.create');
+        $this->packService->getPacks();
+        return view('packs.index');
     }
 
     public function create()
@@ -24,8 +27,16 @@ final class PackController extends Controller
         return view('packs.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
+        $this->packService->createPack(
+            new CreatePackDTO(
+                name: $request->input('name'),
+                symbol: $request->input('symbol'),
+                type: (int)$request->input('type'),
+                imageUrl: $request->input('imageUrl'),
+            )
+        );
         return view('packs.create');
     }
 }
