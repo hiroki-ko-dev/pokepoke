@@ -9,6 +9,12 @@
 @section('content')
 <div class="container">
   <h1 class="text-center my-4">パック一覧</h1>
+  
+  @auth
+    <div class="mb-3">
+      <a href="{{ route('packs.create') }}" class="btn btn-primary">画像登録</a>
+    </div> 
+  @endauth
 
   <table class="table table-bordered">
     <thead>

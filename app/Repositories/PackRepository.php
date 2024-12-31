@@ -24,6 +24,7 @@ final class PackRepository
     public function findAll(): Collection
     {
         $pack = Pack::query();
+        $pack->orderBy('created_at', 'desc');
         return $pack->get();
     }
 }

@@ -19,7 +19,7 @@ final class CardController extends Controller
     {
         try {
             $images = $this->cardService->getAllJpgImages();
-            return view('images.index', [
+            return view('cards.index', [
                 'images' => $images,
             ]);
         } catch (Exception $e) {
