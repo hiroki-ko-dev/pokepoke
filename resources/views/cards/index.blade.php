@@ -19,5 +19,5 @@
     // Laravel から渡された画像データをグローバル変数に設定
     window.images = @json($images);
   </script>
-  @vite(['resources/js/images/ImageGallery.tsx'])
+  @vite(['resources/js/images/create/ImageGallery.tsx'])
 @endpush

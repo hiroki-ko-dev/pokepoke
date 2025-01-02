@@ -9,15 +9,5 @@ class Pack extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'symbol',
-        'type',
-        'image_url',
-    ];
+    protected $guarded = ['id'];
 }

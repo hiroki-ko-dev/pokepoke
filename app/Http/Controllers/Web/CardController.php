@@ -29,4 +29,19 @@ final class CardController extends Controller
             ]);
         }
     }
+
+    public function create()
+    {
+        try {
+            $images = $this->cardService->getAllJpgImages();
+            return view('cards.index', [
+                'images' => $images,
+            ]);
+        } catch (Exception $e) {
+            return view('images.error', [
+                'message' => 'Failed to retrieve images.',
+                'error' => $e->getMessage(),
+            ]);
+        }
+    }
 }

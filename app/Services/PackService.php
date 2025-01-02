@@ -18,7 +18,7 @@ final class PackService
 
     public function getPacks(): Collection
     {
-        return $this->packRepository->findAll();
+        return $this->packRepository->findAllOrderByDesc();
     }
 
     public function createPack(CreatePackDTO $dto): Pack
