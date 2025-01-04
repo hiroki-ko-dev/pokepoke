@@ -3,7 +3,7 @@
 @section('title', 'トップ')
 
 @section('styles')
-  @vite('resources/scss/images/index.scss')
+  @vite('resources/scss/cards/index.scss')
 @endsection
 
 @section('content')
@@ -17,7 +17,7 @@
 @push('scripts')
   <script>
     // Laravel から渡された画像データをグローバル変数に設定
-    window.images = @json($images);
+    window.cards = @json($cards);
   </script>
-  @vite(['resources/js/images/create/ImageGallery.tsx'])
+  @vite(['resources/js/roots/cards/create/CardGallery.tsx'])
 @endpush

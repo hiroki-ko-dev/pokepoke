@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 
 // 画像データの型を定義
-interface ImageGalleryProps {
-  images: string[];
+interface CardGalleryProps {
+  cards: string[];
 }
 
-const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+const CardGallery: React.FC<CardGalleryProps> = ({ cards }) => {
+  const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
   const [formData, setFormData] = useState({
     packId: '',
@@ -15,13 +15,13 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
     reality: ''
   });
 
-  const openModal = (image: string) => {
-    setSelectedImage(image);
+  const openModal = (card: string) => {
+    setSelectedCard(card);
     setModalOpen(true);
   };
 
   const closeModal = () => {
-    setSelectedImage(null);
+    setSelectedCard(null);
     setModalOpen(false);
     setFormData({ packId: '', name: '', reality: '' }); // フォームをリセット
   };
@@ -34,16 +34,16 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // 登録処理を実装
-    console.log('登録データ:', { ...formData, image: selectedImage });
+    console.log('登録データ:', { ...formData, card: selectedCard });
     closeModal();
   };
 
   return (
     <div className="gallery">
-      <div className="image-grid">
-        {images.map((image, index) => (
-          <div key={index} className="image-item" onClick={() => openModal(image)}>
-            <img src={image} alt={`Image ${index}`} className="image" />
+      <div className="card-grid">
+        {cards.map((card, index) => (
+          <div key={index} className="card-item" onClick={() => openModal(card)}>
+            <img src={card} alt={`card ${index}`} className="card" />
           </div>
         ))}
       </div>
@@ -52,9 +52,9 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
         <div className="modal">
           <div className="modal-content">
             <div className="modal-body">
-              <div className="modal-image-container">
+              <div className="modal-card-container">
                 <h2>画像編集</h2>
-                <img src={selectedImage!} alt="Selected" className="modal-image" />
+                <img src={selectedCard!} alt="Selected" className="modal-card" />
               </div>
               <div className="modal-form-container">
                 <form onSubmit={handleSubmit}>
@@ -107,8 +107,8 @@ const ImageGallery: React.FC<ImageGalleryProps> = ({ images }) => {
 };
 
 // Laravel から渡された画像データを取得
-const images = (window as any).images || [];
+const cards = (window as any).cards || [];
 
 // Reactアプリケーションの描画
 const root = ReactDOM.createRoot(document.getElementById('react-root') as HTMLElement);
-root.render(<ImageGallery images={images} />);
+root.render(<CardGallery cards={cards} />);

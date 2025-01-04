@@ -8,8 +8,8 @@ export default defineConfig({
     laravel({
       input: [
         'resources/scss/home/style.scss',
-        'resources/scss/images/index.scss',
-        'resources/js/images/create/ImageGallery.tsx',
+        'resources/scss/cards/index.scss',
+        'resources/js/roots/cards/create/CardGallery.tsx',
       ],
       refresh: true, // ファイル変更時にブラウザをリロード
     }),

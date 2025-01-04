@@ -18,13 +18,13 @@ final class CardController extends Controller
     public function index()
     {
         try {
-            $images = $this->cardService->getAllJpgImages();
+            $cards = $this->cardService->getAllJpgImages();
             return view('cards.index', [
-                'images' => $images,
+                'cards' => $cards,
             ]);
         } catch (Exception $e) {
-            return view('images.error', [
-                'message' => 'Failed to retrieve images.',
+            return view('cards.error', [
+                'message' => 'Failed to retrieve cards.',
                 'error' => $e->getMessage(),
             ]);
         }
@@ -33,13 +33,13 @@ final class CardController extends Controller
     public function create()
     {
         try {
-            $images = $this->cardService->getAllJpgImages();
+            $cards = $this->cardService->getAllImages();
             return view('cards.index', [
-                'images' => $images,
+                'cards' => $cards,
             ]);
         } catch (Exception $e) {
-            return view('images.error', [
-                'message' => 'Failed to retrieve images.',
+            return view('cards.error', [
+                'message' => 'Failed to retrieve cards.',
                 'error' => $e->getMessage(),
             ]);
         }
