@@ -8,10 +8,15 @@
       "moduleResolution": "node",
       "skipLibCheck": true,
       "forceConsistentCasingInFileNames": true,
+      "baseUrl": ".", 
+      "paths": {
+        "@/*": ["resources/js/*"]
+      },
     },
     "include": [
+      "global.d.ts",
       "resources/js/**/*",
-      "resources/ts/**/*"
+      "resources/ts/**/*",
     ]
   }
   

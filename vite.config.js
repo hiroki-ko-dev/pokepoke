@@ -7,9 +7,9 @@ export default defineConfig({
   plugins: [
     laravel({
       input: [
+        'resources/scss/common/style.scss',
         'resources/scss/home/style.scss',
-        'resources/scss/cards/index.scss',
-        'resources/js/roots/cards/create/CardGallery.tsx',
+        'resources/js/roots/cards/create.tsx',
       ],
       refresh: true, // ファイル変更時にブラウザをリロード
     }),
@@ -18,6 +18,11 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': '/resources/js',
+    },
+  },
+  css: {
+    modules: {
+      scopeBehaviour: 'local', // CSSモジュールはローカルスコープ
     },
   },
   build: {
