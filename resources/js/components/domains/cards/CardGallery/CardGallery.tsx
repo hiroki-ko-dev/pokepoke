@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './CardGallery.module.scss'; // CSSモジュールのインポート
+import CreateForm from '../CreateForm/CreateForm';
 
 // 画像データの型を定義
 interface CardGalleryProps {
@@ -33,7 +34,6 @@ const CardGallery: React.FC<CardGalleryProps> = ({ cards }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('登録データ:', { ...formData, card: selectedCard });
     closeModal();
   };
 
@@ -50,67 +50,11 @@ const CardGallery: React.FC<CardGalleryProps> = ({ cards }) => {
           </div>
         ))}
       </div>
-
-      {isModalOpen && (
-        <div className={styles.modal}>
-          <div className={styles.modalContent}>
-            <div className={styles.modalCardContainer}>
-              <h2>画像編集</h2>
-              <img
-                src={selectedCard!}
-                alt="Selected"
-                className={styles.modalCard}
-              />
-            </div>
-            <div className={styles.modalFormContainer}>
-              <form onSubmit={handleSubmit}>
-                <div className={styles.formGroup}>
-                  <label>
-                    Pack ID:
-                    <input
-                      type="text"
-                      name="packId"
-                      value={formData.packId}
-                      onChange={handleInputChange}
-                      className={styles.formControl}
-                    />
-                  </label>
-                </div>
-                <div className={styles.formGroup}>
-                  <label>
-                    Name:
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className={styles.formControl}
-                    />
-                  </label>
-                </div>
-                <div className={styles.formGroup}>
-                  <label>
-                    Reality:
-                    <input
-                      type="text"
-                      name="reality"
-                      value={formData.reality}
-                      onChange={handleInputChange}
-                      className={styles.formControl}
-                    />
-                  </label>
-                </div>
-                <button type="submit" className={styles.submitButton}>
-                  登録
-                </button>
-              </form>
-              <button onClick={closeModal} className={styles.closeButton}>
-                閉じる
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {isModalOpen && 
+      <CreateForm
+        cardUrl={selectedCard ?? ''}
+      />
+      }
     </div>
   );
 };
