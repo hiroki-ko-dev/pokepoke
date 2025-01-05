@@ -34,8 +34,10 @@ final class CardController extends Controller
     {
         try {
             $cards = $this->cardService->getNotRegisteredImages();
+            $conditions = $this->cardService->getCreateConditions();
             return view('cards.create', [
                 'cards' => $cards,
+                'conditions' => $conditions,
             ]);
         } catch (Exception $e) {
             return view('cards.error', [

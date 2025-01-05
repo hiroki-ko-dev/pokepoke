@@ -32,4 +32,12 @@ enum PokemonType: int
             self::Colorless => '無色',
         };
     }
+
+    public static function toArray(): array
+    {
+        return array_reduce(self::cases(), function ($result, $case) {
+            $result[$case->value] = $case->label();
+            return $result;
+        }, []);
+    }
 }

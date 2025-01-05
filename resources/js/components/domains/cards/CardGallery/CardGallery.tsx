@@ -5,11 +5,13 @@ import styles from './CardGallery.module.scss';
 interface CardGalleryProps {
   cards: string[];
   ModalComponent: React.FC<{ cardUrl: string; closeModal: () => void }>; // modalのプロパティ型を指定
+  modalConditions?: Array<any>
 }
 
 const CardGallery: React.FC<CardGalleryProps> = ({ 
   cards,
   ModalComponent,
+  modalConditions,
 }) => {
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
@@ -41,6 +43,7 @@ const CardGallery: React.FC<CardGalleryProps> = ({
         <ModalComponent
           cardUrl={selectedCard ?? ''}
           closeModal={closeModal}
+          {...(modalConditions && { conditions: modalConditions })}
         />
       )}
     </div>

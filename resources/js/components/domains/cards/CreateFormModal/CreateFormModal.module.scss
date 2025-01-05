@@ -1,72 +1,68 @@
-
-
 .modalContent {
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  max-width: 80%;
-  max-height: 80%;
-  overflow-y: auto;
   display: flex;
-  flex-direction: row;
   gap: 20px;
+  align-items: center;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .modalCardContainer {
   flex: 1;
   text-align: center;
-}
 
-.modalCard {
-  max-width: 100%;
-  height: auto;
-  margin: 20px 0;
-  border-radius: 8px;
+  .modalCard {
+    width: 100%;
+    max-width: 200px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 }
 
 .modalFormContainer {
-  flex: 1;
-  text-align: left;
+  flex: 2;
 }
 
 .formGroup {
-  margin-bottom: 15px;
+  margin-bottom: 16px;
+}
 
-  label {
-    display: block;
-    margin-bottom: 8px;
-  }
+.formLabel {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+}
 
-  .formControl {
-    width: 100%;
-    padding: 8px;
+.formControl {
+  width: 100%;
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.2s ease-in-out;
+
+  &:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
   }
 }
 
 .submitButton {
-  padding: 10px 20px;
-  background: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-
-  &:hover {
-    background: #45a049;
-  }
-}
-
-.closeButton {
-  padding: 12px 24px;
-  background: #f44336;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
+  width: 100%;
+  padding: 10px 15px;
   font-size: 16px;
-  margin-top: 10px;
+  color: white;
+  background-color: #28a745;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
 
   &:hover {
-    background: #d32f2f;
+    background-color: #218838;
   }
 }

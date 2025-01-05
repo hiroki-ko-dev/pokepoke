@@ -4,13 +4,17 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Models\Card;
 use App\Repositories\CardRepository;
+use App\Repositories\PackRepository;
+use App\Enums\CardRarity;
+use App\Enums\CardType;
+use App\Enums\PokemonType;
 
 final class CardService
 {
     public function __construct(
-        public readonly CardRepository $cardRepository
+        public readonly CardRepository $cardRepository,
+        public readonly PackRepository $packRepository
     ) {
     }
 
@@ -47,5 +51,15 @@ final class CardService
         }
 
         return $jpgFiles;
+    }
+
+    public function getCreateConditions(): array
+    {
+        $conditions['packs'] = $this->packRepository->findAllOrderByDesc()->pluck('name', 'id');
+        $conditions['rarities'] = CardRarity::toArray();
+        $conditions['cardType'] = CardType::toArray();
+        $conditions['pokemonType'] = PokemonType::toArray();
+
+        return $conditions;
     }
 }

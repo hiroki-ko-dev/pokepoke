@@ -25,7 +25,7 @@ final class CardRepository
     public function findAllOrderByDesc(): Collection
     {
         $card = $this->buildWhereClause();
-        $card->orderBy('created_at', 'desc');
+        $card->orderByDesc('id');
         return $card->get();
     }
 }

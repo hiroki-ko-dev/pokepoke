@@ -25,7 +25,7 @@ final class PackRepository
     public function buildWhereClause(): Builder
     {
         $pack = Pack::query();
-        return $pack；
+        return $pack;
     }
 
     public function findAll(): Collection
@@ -37,7 +37,7 @@ final class PackRepository
     public function findAllOrderByDesc(): Collection
     {
         $pack = $this->buildWhereClause();
-        $pack->orderBy('created_at', 'desc');
+        $pack->orderByDesc('id');
         return $pack->get();
     }
 }

@@ -14,6 +14,7 @@
   <script>
     // Laravel から渡された画像データをグローバル変数に設定
     window.cards = @json($cards);
+    window.conditions = @json($conditions);
   </script>
   @vite(['resources/js/roots/cards/create.tsx'])
 @endpush

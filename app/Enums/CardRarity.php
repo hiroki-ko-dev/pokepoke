@@ -26,7 +26,16 @@ enum CardRarity: int
             self::Star1 => '星1',
             self::Star2 => '星2',
             self::Star3 => '星3',
-            self::Crown => 'プロモ',
+            self::Crown => 'クラウン',
+            self::Promo => 'プロモ',
         };
+    }
+
+    public static function toArray(): array
+    {
+        return array_reduce(self::cases(), function ($result, $case) {
+            $result[$case->value] = $case->label();
+            return $result;
+        }, []);
     }
 }
