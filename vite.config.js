@@ -9,6 +9,7 @@ export default defineConfig({
       input: [
         'resources/scss/common/style.scss',
         'resources/scss/home/style.scss',
+        'resources/js/roots/cards/index.tsx',
         'resources/js/roots/cards/create.tsx',
       ],
       refresh: true, // ファイル変更時にブラウザをリロード

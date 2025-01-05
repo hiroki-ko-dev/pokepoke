@@ -1,6 +1,6 @@
 @extends('layouts.layouts')
 
-@section('title', 'カード一覧')
+@section('title', 'カード登録')
 
 @section('content')
 <div class="features">
@@ -15,5 +15,5 @@
     // Laravel から渡された画像データをグローバル変数に設定
     window.cards = @json($cards);
   </script>
-  @vite(['resources/js/roots/cards/index.tsx'])
+  @vite(['resources/js/roots/cards/create.tsx'])
 @endpush

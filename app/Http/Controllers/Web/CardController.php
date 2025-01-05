@@ -33,8 +33,8 @@ final class CardController extends Controller
     public function create()
     {
         try {
-            $cards = $this->cardService->getAllImages();
-            return view('cards.index', [
+            $cards = $this->cardService->getNotRegisteredImages();
+            return view('cards.create', [
                 'cards' => $cards,
             ]);
         } catch (Exception $e) {

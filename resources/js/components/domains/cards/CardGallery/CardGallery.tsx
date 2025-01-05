@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
-import styles from './CardGallery.module.scss'; // CSSモジュールのインポート
-import CreateForm from '../CreateForm/CreateForm';
+import styles from './CardGallery.module.scss';
 
 // 画像データの型を定義
 interface CardGalleryProps {
   cards: string[];
+  ModalComponent: React.FC<{ cardUrl: string; closeModal: () => void }>; // modalのプロパティ型を指定
 }
 
-const CardGallery: React.FC<CardGalleryProps> = ({ cards }) => {
+const CardGallery: React.FC<CardGalleryProps> = ({ 
+  cards,
+  ModalComponent,
+}) => {
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
-  const [formData, setFormData] = useState({
-    packId: '',
-    name: '',
-    reality: '',
-  });
 
   const openModal = (card: string) => {
     setSelectedCard(card);
@@ -24,17 +22,6 @@ const CardGallery: React.FC<CardGalleryProps> = ({ cards }) => {
   const closeModal = () => {
     setSelectedCard(null);
     setModalOpen(false);
-    setFormData({ packId: '', name: '', reality: '' }); // フォームをリセット
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    closeModal();
   };
 
   return (
@@ -50,11 +37,12 @@ const CardGallery: React.FC<CardGalleryProps> = ({ cards }) => {
           </div>
         ))}
       </div>
-      {isModalOpen && 
-      <CreateForm
-        cardUrl={selectedCard ?? ''}
-      />
-      }
+      {isModalOpen && (
+        <ModalComponent
+          cardUrl={selectedCard ?? ''}
+          closeModal={closeModal}
+        />
+      )}
     </div>
   );
 };

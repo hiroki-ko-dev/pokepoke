@@ -1,0 +1,35 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  .modalPanel {
+    background-color: white;
+    padding: 20px;
+    padding-top: 0;
+    border-radius: 8px;
+    position: relative;
+    width: auto;
+    height: auto;
+    .closeButton {
+      width: 100%;
+      height: 70px;
+      padding: 0;
+      margin: 0;
+      text-align: right;
+      font-size: 50px;
+      cursor: pointer;
+      color: #333;
+      &:hover {
+        color: red;
+      }
+    }
+  }
+}
+

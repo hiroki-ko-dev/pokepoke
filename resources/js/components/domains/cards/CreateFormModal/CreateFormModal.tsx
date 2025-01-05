@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import styles from './CreateForm.module.scss'; // CSSモジュールのインポート
+import styles from './CreateFormModal.module.scss'; // CSSモジュールのインポート
+import UiModal from '@/components/uis/UiModal';
 
-interface CreateFormProps {
+interface CreateFormModalProps {
   cardUrl: string;
+  closeModal: () => void;
 }
 
-const CreateForm: React.FC<CreateFormProps> = ({cardUrl}) => {
+const CreateFormModal: React.FC<CreateFormModalProps> = ({
+  cardUrl,
+  closeModal,
+}) => {
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     packId: '',
@@ -13,7 +18,8 @@ const CreateForm: React.FC<CreateFormProps> = ({cardUrl}) => {
     reality: '',
   });
 
-  const closeModal = () => {
+  const closeButton = () => {
+    closeModal();
     setSelectedCard(null);
     setFormData({ packId: '', name: '', reality: '' }); // フォームをリセット
   };
@@ -30,10 +36,11 @@ const CreateForm: React.FC<CreateFormProps> = ({cardUrl}) => {
   };
 
   return (
-    <div className={styles.modal}>
+    <UiModal
+      onClose={closeButton}
+    >
       <div className={styles.modalContent}>
         <div className={styles.modalCardContainer}>
-          <h2>画像編集</h2>
           <img
             src={cardUrl}
             alt="Selected"
@@ -82,13 +89,10 @@ const CreateForm: React.FC<CreateFormProps> = ({cardUrl}) => {
               登録
             </button>
           </form>
-          <button onClick={closeModal} className={styles.closeButton}>
-            閉じる
-          </button>
         </div>
       </div>
-    </div>
+    </UiModal>
   );
 };
 
-export default CreateForm;
+export default CreateFormModal;
