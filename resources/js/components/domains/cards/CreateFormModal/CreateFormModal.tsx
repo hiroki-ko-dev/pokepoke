@@ -8,6 +8,9 @@ interface CreateFormModalProps {
   closeModal: () => void;
   conditions: {
     packs: { [key: string]: string };
+    rarities: { [key: string]: string };
+    cardTypes: { [key: string]: string };
+    pokemonTypes: { [key: string]: string };
   };
 }
 
@@ -20,13 +23,15 @@ const CreateFormModal: React.FC<CreateFormModalProps> = ({
   const [formData, setFormData] = useState({
     packId: '',
     name: '',
-    reality: '',
+    realityId: '',
+    cardTypeId: '',
+    pokemonTypeId: '',
   });
 
   const closeButton = () => {
     closeModal();
     setSelectedCard(null);
-    setFormData({ packId: '', name: '', reality: '' }); // フォームをリセット
+    setFormData({ packId: '', name: '', realityId: '', cardTypeId: '', pokemonTypeId: '' }); // フォームをリセット
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -42,6 +47,24 @@ const CreateFormModal: React.FC<CreateFormModalProps> = ({
 
   const packsArray = Object.entries(conditions.packs)
   .reverse() // 逆順にする
+  .map(([id, name]) => ({
+    id: Number(id), // idをnumber型に変換
+    name,
+  }));
+
+  const raritiesArray = Object.entries(conditions.rarities)
+  .map(([id, name]) => ({
+    id: Number(id), // idをnumber型に変換
+    name,
+  }));
+
+  const cardTypesArray = Object.entries(conditions.cardTypes)
+  .map(([id, name]) => ({
+    id: Number(id), // idをnumber型に変換
+    name,
+  }));
+
+  const pokemonTypesArray = Object.entries(conditions.pokemonTypes)
   .map(([id, name]) => ({
     id: Number(id), // idをnumber型に変換
     name,
@@ -82,13 +105,40 @@ const CreateFormModal: React.FC<CreateFormModalProps> = ({
             </div>
             <div className={styles.formGroup}>
               <label className={styles.formLabel}>
-                レアリティ:
-                <input
-                  type="text"
-                  name="reality"
-                  value={formData.reality}
+                レア度を選択:
+                <UiSelectBox
+                  name="rarityId"
+                  value={formData.realityId}
                   onChange={handleInputChange}
-                  className={styles.formControl}
+                  options={raritiesArray}
+                  canNull={false}
+                  placeholder="パックを選択してください"
+                />
+              </label>
+            </div>
+            <div className={styles.formGroup}>
+              <label className={styles.formLabel}>
+                カード種類を選択:
+                <UiSelectBox
+                  name="cardTypeId"
+                  value={formData.cardTypeId}
+                  onChange={handleInputChange}
+                  options={cardTypesArray}
+                  canNull={false}
+                  placeholder="カード種類を選択してください"
+                />
+              </label>
+            </div>
+            <div className={styles.formGroup}>
+              <label className={styles.formLabel}>
+                ポケモンタイプを選択:
+                <UiSelectBox
+                  name="pokemonTypeId"
+                  value={formData.pokemonTypeId}
+                  onChange={handleInputChange}
+                  options={pokemonTypesArray}
+                  canNull={false}
+                  placeholder="ポケモンタイプを選択してください"
                 />
               </label>
             </div>

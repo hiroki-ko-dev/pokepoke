@@ -57,8 +57,8 @@ final class CardService
     {
         $conditions['packs'] = $this->packRepository->findAllOrderByDesc()->pluck('name', 'id');
         $conditions['rarities'] = CardRarity::toArray();
-        $conditions['cardType'] = CardType::toArray();
-        $conditions['pokemonType'] = PokemonType::toArray();
+        $conditions['cardTypes'] = CardType::toArray();
+        $conditions['pokemonTypes'] = PokemonType::toArray();
 
         return $conditions;
     }
