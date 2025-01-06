@@ -8,6 +8,7 @@ use App\Repositories\CardRepository;
 use App\Repositories\PackRepository;
 use App\Enums\CardRarity;
 use App\Enums\CardType;
+use App\Enums\CardRule;
 use App\Enums\PokemonType;
 
 final class CardService
@@ -16,6 +17,11 @@ final class CardService
         public readonly CardRepository $cardRepository,
         public readonly PackRepository $packRepository
     ) {
+    }
+
+    public function createCard()
+    {
+        return $this->createService->create();
     }
 
     public function getAllJpgImages(): array
@@ -56,8 +62,9 @@ final class CardService
     public function getCreateConditions(): array
     {
         $conditions['packs'] = $this->packRepository->findAllOrderByDesc()->pluck('name', 'id');
-        $conditions['rarities'] = CardRarity::toArray();
+        $conditions['cardRarities'] = CardRarity::toArray();
         $conditions['cardTypes'] = CardType::toArray();
+        $conditions['cardRules'] = CardRule::toArray();
         $conditions['pokemonTypes'] = PokemonType::toArray();
 
         return $conditions;
