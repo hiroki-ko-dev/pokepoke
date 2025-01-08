@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Repositories;
 
 use App\Models\Pack;
-use App\DTOs\Pack\CreatePackDTO;
+use App\DTOs\Pack\Create\CreatePackDTO;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
 

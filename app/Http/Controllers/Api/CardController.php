@@ -1,0 +1,60 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Services\CardService;
+use Exception;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Log\Logger;
+use App\DTOs\Card\Create\CreateCardDTO;
+use App\Enums\CardAcquisitionMethod;
+
+final class CardController extends Controller
+{
+    public function __construct(
+        public readonly CardService $cardService,
+        private readonly Logger $logger // DIでLoggerを取得
+    ) {
+    }
+
+    public function store(Request $request): JsonResponse
+    {
+        $this->logger->debug('CardController@store called.');
+
+        try {
+            $cards = $this->cardService->createCard(
+                new CreateCardDTO(
+                    name: $request->input('name'),
+                    packId: (int) $request->input('pack_id'),
+                    number: (int) $request->input('number'),
+                    pokemonTypeId: $request->input('pokemon_type_id') ? (int) $request->input('pokemon_type_id') : null,
+                    cardTypeId: (int) $request->input('card_type_id'),
+                    cardRarityId: (int) $request->input('card_rarity_id'),
+                    cardRuleId: (int) $request->input('card_rule_id'),
+                    cardAcquisitionMethodId: CardAcquisitionMethod::PACK->value,
+                    imageUrl: (string) $request->input('image_url')
+                )
+            );
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Card created successfully.',
+                'data' => $cards,
+            ], 201); // 201 Created
+        } catch (Exception $e) {
+            $this->logger->error('Error creating card: ' . $e->getMessage(), [
+                'exception' => $e,
+                'request_data' => $request->all(),
+            ]);
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to create card.',
+                'error' => $e->getMessage(),
+            ], 500); // 500 Internal Server Error
+        }
+    }
+}

@@ -10,6 +10,8 @@ use App\Enums\CardRarity;
 use App\Enums\CardType;
 use App\Enums\CardRule;
 use App\Enums\PokemonType;
+use App\DTOs\Card\Create\CreateCardDTO;
+use App\Models\Card;
 
 final class CardService
 {
@@ -19,9 +21,9 @@ final class CardService
     ) {
     }
 
-    public function createCard()
+    public function createCard(CreateCardDTO $dto): Card
     {
-        return $this->createService->create();
+        return $this->cardRepository->create($dto);
     }
 
     public function getAllJpgImages(): array

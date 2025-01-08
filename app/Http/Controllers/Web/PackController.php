@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Services\PackService;
-use App\DTOs\Pack\CreatePackDTO;
+use App\DTOs\Pack\Create\CreatePackDTO;
 use Illuminate\Http\Request;
 
 final class PackController extends Controller

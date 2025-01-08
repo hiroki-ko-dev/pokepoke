@@ -21,7 +21,6 @@ const CreateFormModal: React.FC<CreateFormModalProps> = ({
   closeModal,
   conditions = {},
 }) => {
-  const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const { formData, handleChange, resetForm } = useForm({
     initialValues: {
       packId: '',
@@ -30,12 +29,12 @@ const CreateFormModal: React.FC<CreateFormModalProps> = ({
       cardTypeId: '',
       cardRuleId: '',
       pokemonTypeId: '',
+      imageUrl: cardUrl, // 初期値としてカード画像URLを設定
     },
   });
 
   const closeButton = () => {
     closeModal();
-    setSelectedCard(null);
     resetForm();
   };
 
@@ -49,13 +48,16 @@ const CreateFormModal: React.FC<CreateFormModalProps> = ({
         throw new Error('CSRF token is missing.');
       }
 
+      // 送信データにimageUrlを含める
+      const dataToSubmit = { ...formData, imageUrl: cardUrl };
+
       const response = await fetch('/api/cards', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'X-CSRF-TOKEN': csrfToken,
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(dataToSubmit),
       });
 
       if (response.ok) {
@@ -71,7 +73,7 @@ const CreateFormModal: React.FC<CreateFormModalProps> = ({
 
   const convertConditionsToArray = (conditions: Record<string, string>) => {
     return Object.entries(conditions).map(([id, name]) => ({
-      id: Number(id), // idをnumber型に変換
+      id: Number(id),
       name,
     }));
   };

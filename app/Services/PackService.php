@@ -6,7 +6,7 @@ namespace App\Services;
 
 use App\Models\Pack;
 use App\Repositories\PackRepository;
-use App\DTOs\Pack\CreatePackDTO;
+use App\DTOs\Pack\Create\CreatePackDTO;
 use Illuminate\Support\Collection;
 
 final class PackService

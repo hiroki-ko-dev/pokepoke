@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DTOs\Pack;
+namespace App\DTOs\Pack\Create;
 
 class CreatePackDTO
 {
