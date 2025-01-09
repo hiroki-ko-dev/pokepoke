@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import styles from './CreateFormModal.module.scss';
 import UiModal from '@/components/uis/UiModal';
 import UiSelectBox from '@/components/uis/UiSelectBox';
@@ -8,11 +8,11 @@ interface CreateFormModalProps {
   cardUrl: string;
   closeModal: () => void;
   conditions: {
-    packs?: { [key: string]: string };
-    cardRarities?: { [key: string]: string };
-    cardTypes?: { [key: string]: string };
-    cardRules?: { [key: string]: string };
-    pokemonTypes?: { [key: string]: string };
+    packs?: { [key: number]: string };
+    cardRarities?: { [key: number]: string };
+    cardTypes?: { [key: number]: string };
+    cardRules?: { [key: number]: string };
+    pokemonTypes?: { [key: number]: string };
   };
 }
 
@@ -21,22 +21,11 @@ const CreateFormModal: React.FC<CreateFormModalProps> = ({
   closeModal,
   conditions = {},
 }) => {
-  const { formData, handleChange, resetForm } = useForm({
-    initialValues: {
-      packId: '',
-      name: '',
-      cardRealityId: '',
-      cardTypeId: '',
-      cardRuleId: '',
-      pokemonTypeId: '',
-      imageUrl: cardUrl, // 初期値としてカード画像URLを設定
-    },
-  });
 
-  const closeButton = () => {
-    closeModal();
-    resetForm();
-  };
+  function closeButton() {
+      closeModal();
+      resetForm();
+    }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -84,6 +73,19 @@ const CreateFormModal: React.FC<CreateFormModalProps> = ({
   const cardRulesArray = convertConditionsToArray(conditions.cardRules);
   const pokemonTypesArray = convertConditionsToArray(conditions.pokemonTypes);
 
+  const { formData, handleChange, resetForm } = useForm(
+    {
+      initialValues: {
+        packId: packsArray[0].id,
+        name: '',
+        cardRarityId: raritiesArray[0].id,
+        cardTypeId: cardTypesArray[0].id,
+        cardRuleId: cardRulesArray[0].id,
+        pokemonTypeId: pokemonTypesArray[0].id,
+        imageUrl: cardUrl,
+      },
+    });
+
   return (
     <UiModal onClose={closeButton}>
       <div className={styles.modalContent}>
@@ -121,8 +123,8 @@ const CreateFormModal: React.FC<CreateFormModalProps> = ({
               <label className={styles.formLabel}>
                 レア度を選択:
                 <UiSelectBox
-                  name="cardRealityId"
-                  value={formData.cardRealityId}
+                  name="cardRarityId"
+                  value={formData.cardRarityId}
                   onChange={handleChange}
                   options={raritiesArray}
                   canNull={false}

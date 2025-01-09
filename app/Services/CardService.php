@@ -23,6 +23,13 @@ final class CardService
 
     public function createCard(CreateCardDTO $dto): Card
     {
+        $dto->imageUrl = config('app.url') . $dto->imageUrl;
+        $dto->number = (function ($imageUrl) {
+            $parts = explode('/', $imageUrl); // スラッシュで分割して配列化
+            $filename = array_pop($parts); // 最後の要素（ファイル名）を取得
+            $numberParts = explode('-', $filename, 3); // 最初の2つのハイフンで分割
+            return (int)$numberParts[1]; // 2番目の部分を返す
+        })($dto->imageUrl);
         return $this->cardRepository->create($dto);
     }
 

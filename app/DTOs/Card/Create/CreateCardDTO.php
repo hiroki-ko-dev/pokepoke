@@ -13,7 +13,7 @@ class CreateCardDTO
         public int $cardRuleId,
         public int $cardAcquisitionMethodId,
         public string $imageUrl,
-        public ?int $pokemonTypeId,
+        public int $pokemonTypeId,
     ) {
     }
 }

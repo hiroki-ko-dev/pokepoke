@@ -23,20 +23,18 @@ final class CardController extends Controller
 
     public function store(Request $request): JsonResponse
     {
-        $this->logger->debug('CardController@store called.');
-
         try {
             $cards = $this->cardService->createCard(
                 new CreateCardDTO(
                     name: $request->input('name'),
-                    packId: (int) $request->input('pack_id'),
+                    packId: (int) $request->input('packId'),
                     number: (int) $request->input('number'),
-                    pokemonTypeId: $request->input('pokemon_type_id') ? (int) $request->input('pokemon_type_id') : null,
-                    cardTypeId: (int) $request->input('card_type_id'),
-                    cardRarityId: (int) $request->input('card_rarity_id'),
-                    cardRuleId: (int) $request->input('card_rule_id'),
+                    pokemonTypeId: (int) $request->input('pokemonTypeId'),
+                    cardTypeId: (int) $request->input('cardTypeId'),
+                    cardRarityId: (int) $request->input('cardRarityId'),
+                    cardRuleId: (int) $request->input('cardRuleId'),
                     cardAcquisitionMethodId: CardAcquisitionMethod::PACK->value,
-                    imageUrl: (string) $request->input('image_url')
+                    imageUrl: (string) $request->input('imageUrl')
                 )
             );
 
