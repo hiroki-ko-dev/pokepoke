@@ -7,6 +7,9 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Services\CardService;
 use Exception;
+use App\DTOs\Domains\Card\Paginate\PaginateCardsDTO;
+use App\DTOs\Domains\Card\Criteria\CriteriaCardsDTO;
+use App\DTOs\Domains\Card\Criteria\CriteriaCardsDTO as CriteriaCriteriaCardsDTO;
 
 final class CardController extends Controller
 {
@@ -18,7 +21,13 @@ final class CardController extends Controller
     public function index()
     {
         try {
-            $cards = $this->cardService->getAllJpgImages();
+            $cards = $this->cardService->paginateCards(
+                new PaginateCardsDTO(
+                    criteriaCardsDTO: new CriteriaCardsDTO(),
+                    page: 1,
+                    perPage: 100,
+                )
+            );
             return view('cards.index', [
                 'cards' => $cards,
             ]);

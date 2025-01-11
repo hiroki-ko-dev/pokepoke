@@ -11,7 +11,7 @@ use App\Enums\CardType;
 use App\Enums\CardRule;
 use App\Enums\PokemonType;
 use App\DTOs\Domains\Card\Create\CreateCardDTO;
-use App\DTOs\Domains\Card\Criteria\CriteriaCardsDTO;
+use App\DTOs\Domains\Card\Paginate\PaginateCardsDTO;
 use App\Models\Card;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
@@ -36,10 +36,9 @@ final class CardService
         return $this->cardRepository->create($dto);
     }
 
-    // paginateCardsの戻り値の型を指定
-    public function paginateCards(): LengthAwarePaginator
+    public function paginateCards(PaginateCardsDTO $dto): LengthAwarePaginator
     {
-        return $this->cardRepository->paginate();
+        return $this->cardRepository->paginate($dto);
     }
 
     public function getAllJpgImages(): array
@@ -58,9 +57,6 @@ final class CardService
             ->pluck('image_url')
             ->map(fn($url) => trim(str_replace($appUrl, '', $url)))
             ->toArray();
-
-        \Log::debug('Images (normalized):', $images);
-        \Log::debug('Registered Images (normalized):', $registeredImages);
 
         return array_values(array_filter($images, function ($image) use ($registeredImages) {
             return !in_array($image, $registeredImages, true);

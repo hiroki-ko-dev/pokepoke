@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
 use App\DTOs\Domains\Card\Create\CreateCardDTO;
 use App\DTOs\Domains\Card\Criteria\CriteriaCardsDTO;
+use App\DTOs\Domains\Card\Paginate\PaginateCardsDTO;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 final class CardRepository
@@ -58,9 +59,9 @@ final class CardRepository
     }
 
 
-    public function paginate(): LengthAwarePaginator
+    public function paginate(PaginateCardsDTO $dto): LengthAwarePaginator
     {
-        $card = $this->buildWhereClause();
-        return $card->paginate();
+        $card = $this->buildWhereClause($dto->criteriaCardsDTO);
+        return $card->paginate($dto->perPage);
     }
 }
