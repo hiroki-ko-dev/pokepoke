@@ -39,7 +39,7 @@ final class CardRepository
         return Card::get();
     }
 
-    public function buildWhereClause(?CriteriaCardsDTO $dto): Builder
+    public function buildWhereClause(CriteriaCardsDTO $dto): Builder
     {
         $card = Card::query();
         if ($dto->orderByDTO) {
@@ -51,7 +51,7 @@ final class CardRepository
         return $card;
     }
 
-    public function findByCriteria(?CriteriaCardsDTO $dto): Collection
+    public function findByCriteria(CriteriaCardsDTO $dto): Collection
     {
         $card = $this->buildWhereClause($dto);
         return $card->get();

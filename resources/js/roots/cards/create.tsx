@@ -8,6 +8,7 @@ const conditions = (window as any).conditions || [];
 
 // Reactアプリケーションの描画
 const root = ReactDOM.createRoot(document.getElementById('react-root') as HTMLElement);
+
 root.render(
 <CardGallery
   cards={cards}

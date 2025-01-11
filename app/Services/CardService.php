@@ -51,13 +51,20 @@ final class CardService
     public function getNotRegisteredImages(): array
     {
         $directory = public_path('assets/images/cards');
-        $images = $this->getFilesRecursively($directory);
-        $registeredImages = $this->cardRepository->findAll()->pluck('image_url')->toArray();
-        $notRegisteredImages = array_filter($images, function ($image) use ($registeredImages) {
-            return !in_array(basename($image), $registeredImages);
-        });
+        $images = array_map('trim', $this->getFilesRecursively($directory)); // trimを適用
+        $appUrl = config('app.url');
 
-        return $notRegisteredImages;
+        $registeredImages = $this->cardRepository->findAll()
+            ->pluck('image_url')
+            ->map(fn($url) => trim(str_replace($appUrl, '', $url)))
+            ->toArray();
+
+        \Log::debug('Images (normalized):', $images);
+        \Log::debug('Registered Images (normalized):', $registeredImages);
+
+        return array_values(array_filter($images, function ($image) use ($registeredImages) {
+            return !in_array($image, $registeredImages, true);
+        }));
     }
 
     private function getFilesRecursively(string $directory): array
