@@ -6,7 +6,8 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Services\PackService;
-use App\DTOs\Pack\Create\CreatePackDTO;
+use App\DTOs\Domains\Pack\Criteria\CriteriaPacksDTO;
+use App\DTOs\Domains\Pack\Create\CreatePackDTO;
 use Illuminate\Http\Request;
 
 final class PackController extends Controller
@@ -18,7 +19,9 @@ final class PackController extends Controller
 
     public function index()
     {
-        $packs = $this->packService->getPacks();
+        $packs = $this->packService->getPacks(
+            new CriteriaPacksDTO()
+        );
         return view('packs.index', compact('packs'));
     }
 

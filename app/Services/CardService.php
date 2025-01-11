@@ -10,8 +10,11 @@ use App\Enums\CardRarity;
 use App\Enums\CardType;
 use App\Enums\CardRule;
 use App\Enums\PokemonType;
-use App\DTOs\Card\Create\CreateCardDTO;
+use App\DTOs\Domains\Card\Create\CreateCardDTO;
+use App\DTOs\Domains\Card\Criteria\CriteriaCardsDTO;
 use App\Models\Card;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 final class CardService
 {
@@ -31,6 +34,12 @@ final class CardService
             return (int)$numberParts[1]; // 2番目の部分を返す
         })($dto->imageUrl);
         return $this->cardRepository->create($dto);
+    }
+
+    // paginateCardsの戻り値の型を指定
+    public function paginateCards(): LengthAwarePaginator
+    {
+        return $this->cardRepository->paginate();
     }
 
     public function getAllJpgImages(): array
@@ -70,7 +79,7 @@ final class CardService
 
     public function getCreateConditions(): array
     {
-        $conditions['packs'] = $this->packRepository->findAllOrderByDesc()->pluck('name', 'id');
+        $conditions['packs'] = $this->packRepository->findAll()->pluck('name', 'id');
         $conditions['cardRarities'] = CardRarity::toArray();
         $conditions['cardTypes'] = CardType::toArray();
         $conditions['cardRules'] = CardRule::toArray();

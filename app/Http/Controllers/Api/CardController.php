@@ -10,7 +10,7 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Log\Logger;
-use App\DTOs\Card\Create\CreateCardDTO;
+use App\DTOs\Domains\Card\Create\CreateCardDTO;
 use App\Enums\CardAcquisitionMethod;
 
 final class CardController extends Controller

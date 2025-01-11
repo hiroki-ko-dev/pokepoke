@@ -1,8 +1,10 @@
 <?php
 
-namespace App\DTOs\Pack\Create;
+declare(strict_types=1);
 
-class CreatePackDTO
+namespace App\DTOs\Domains\Pack\Create;
+
+final class CreatePackDTO
 {
     public function __construct(
         public string $name,

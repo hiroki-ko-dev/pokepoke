@@ -7,7 +7,9 @@ namespace App\Repositories;
 use App\Models\Card;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
-use App\DTOs\Card\Create\CreateCardDTO;
+use App\DTOs\Domains\Card\Create\CreateCardDTO;
+use App\DTOs\Domains\Card\Criteria\CriteriaCardsDTO;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 final class CardRepository
 {
@@ -32,22 +34,33 @@ final class CardRepository
         return $this->buildSaveClause($card, $dto);
     }
 
-    public function buildWhereClause(): Builder
+    public function findAll(): Collection
+    {
+        return Card::get();
+    }
+
+    public function buildWhereClause(?CriteriaCardsDTO $dto): Builder
     {
         $card = Card::query();
+        if ($dto->orderByDTO) {
+            $card->orderBy(
+                $dto->orderByDTO->columnName,
+                $dto->orderByDTO->getOrderDirection(),
+            );
+        }
         return $card;
     }
 
-    public function findAll(): Collection
+    public function findByCriteria(?CriteriaCardsDTO $dto): Collection
     {
-        $card = $this->buildWhereClause();
+        $card = $this->buildWhereClause($dto);
         return $card->get();
     }
 
-    public function findAllOrderByDesc(): Collection
+
+    public function paginate(): LengthAwarePaginator
     {
         $card = $this->buildWhereClause();
-        $card->orderByDesc('id');
-        return $card->get();
+        return $card->paginate();
     }
 }

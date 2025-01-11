@@ -32,18 +32,18 @@ final class CardController extends Controller
 
     public function create()
     {
-        try {
+        // try {
             $cards = $this->cardService->getNotRegisteredImages();
             $conditions = $this->cardService->getCreateConditions();
             return view('cards.create', [
                 'cards' => $cards,
                 'conditions' => $conditions,
             ]);
-        } catch (Exception $e) {
-            return view('cards.error', [
-                'message' => 'Failed to retrieve cards.',
-                'error' => $e->getMessage(),
-            ]);
-        }
+        // } catch (Exception $e) {
+        //     return view('cards.error', [
+        //         'message' => 'Failed to retrieve cards.',
+        //         'error' => $e->getMessage(),
+        //     ]);
+        // }
     }
 }

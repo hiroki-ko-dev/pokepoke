@@ -6,7 +6,8 @@ namespace App\Services;
 
 use App\Models\Pack;
 use App\Repositories\PackRepository;
-use App\DTOs\Pack\Create\CreatePackDTO;
+use App\DTOs\Domains\Pack\Criteria\CriteriaPacksDTO;
+use App\DTOs\Domains\Pack\Create\CreatePackDTO;
 use Illuminate\Support\Collection;
 
 final class PackService
@@ -16,9 +17,9 @@ final class PackService
     ) {
     }
 
-    public function getPacks(): Collection
+    public function getPacks(CriteriaPacksDTO $dto): Collection
     {
-        return $this->packRepository->findAllOrderByDesc();
+        return $this->packRepository->findByCriteria($dto);
     }
 
     public function createPack(CreatePackDTO $dto): Pack

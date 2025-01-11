@@ -1,8 +1,10 @@
 <?php
 
-namespace App\DTOs\Card\Create;
+declare(strict_types=1);
 
-class CreateCardDTO
+namespace App\DTOs\Domains\Card\Create;
+
+final class CreateCardDTO
 {
     public function __construct(
         public string $name,
