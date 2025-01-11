@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Web\CardController;
 use App\Http\Controllers\Web\PackController;
+use App\Http\Controllers\Web\BlogController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -11,6 +12,7 @@ Route::get('/', function () {
 
 Route::resource('cards', CardController::class);
 Route::resource('packs', PackController::class);
+Route::resource('blogs', BlogController::class);
 
 require __DIR__ . '/auth.php';
 

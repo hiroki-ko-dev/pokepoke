@@ -10,8 +10,10 @@ export default defineConfig({
         'resources/scss/common/style.scss',
         'resources/scss/home/style.scss',
         'resources/scss/packs/index.scss',
+        'resources/scss/blogs/create.scss',
         'resources/js/roots/cards/index.tsx',
         'resources/js/roots/cards/create.tsx',
+        'resources/js/roots/blogs/create.tsx',
       ],
       refresh: true, // ファイル変更時にブラウザをリロード
     }),

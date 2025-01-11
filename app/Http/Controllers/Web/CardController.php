@@ -9,7 +9,6 @@ use App\Services\CardService;
 use Exception;
 use App\DTOs\Domains\Card\Paginate\PaginateCardsDTO;
 use App\DTOs\Domains\Card\Criteria\CriteriaCardsDTO;
-use App\DTOs\Domains\Card\Criteria\CriteriaCardsDTO as CriteriaCriteriaCardsDTO;
 
 final class CardController extends Controller
 {
